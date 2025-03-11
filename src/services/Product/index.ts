@@ -23,7 +23,8 @@ export const createProduct = async (data: FormData) => {
 export const getProducts = async (
   page?: string | undefined,
   limit?: string,
-  query?: { [key: string]: string | undefined }
+  query?: { [key: string]: string | undefined },
+  category?: string | undefined
 ) => {
   const params = new URLSearchParams();
   if (query?.price) {
@@ -139,4 +140,18 @@ export const getConditions = async (page?: string, limit?: string) => {
   );
 
   return conditions;
+};
+
+export const deleteProduct = async (id: string) => {
+  const token = (await cookies()).get("token")!.value;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API}/products/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res.json();
 };

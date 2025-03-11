@@ -40,7 +40,6 @@ export default function DynamicFilter() {
 
   const handleSearchQuery = (query: string, value: string | number) => {
     const params = new URLSearchParams(searchParams.toString());
-    console.log(query, value);
     if (value) {
       params.set(query, value.toString());
     } else {

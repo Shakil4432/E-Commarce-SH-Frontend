@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getProducts } from "@/services/Product";
+import { deleteProduct, getProducts } from "@/services/Product";
 import { ColumnDef } from "@tanstack/react-table";
 import { SHTable } from "@/components/ui/core/SHTable";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Pencil, Trash2 } from "lucide-react";
 import TablePagination from "@/components/ui/core/SHTable/TablePagination";
 import { IProduct } from "@/types/product";
+import { toast } from "sonner";
 
 export type Product = {
   _id: string;
@@ -35,14 +36,15 @@ const ManageProducts = ({
 }) => {
   const router = useRouter();
 
-  // const handleDelete = async (id: string) => {
-  //   try {
-  //     await deleteProduct(id);
-  //     setProducts((prev) => prev.filter((product) => product._id !== id));
-  //   } catch (error) {
-  //     console.error("Error deleting product:", error);
-  //   }
-  // };
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteProduct(id);
+      toast.success("Product deleted successfully");
+      router.refresh();
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
 
   const columns: ColumnDef<Product>[] = [
     {
@@ -122,7 +124,7 @@ const ManageProducts = ({
           </Button>
           <Button
             className="bg-red-600 text-white px-2 py-1 rounded-full"
-            // onClick={() => handleDelete(row.original._id)}
+            onClick={() => handleDelete(row.original._id)}
           >
             <Trash2 size={20} className="text-white hover:text-red-700" />
           </Button>

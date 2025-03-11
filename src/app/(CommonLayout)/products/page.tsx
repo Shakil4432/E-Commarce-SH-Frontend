@@ -13,7 +13,6 @@ const AllProductsPage = async ({
   const { page } = await searchParams;
   const { data } = await getProducts(page, "8", query);
   const { result, meta } = data;
-  console.log(await searchParams);
 
   return (
     <div>

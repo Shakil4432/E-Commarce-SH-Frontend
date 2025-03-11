@@ -46,7 +46,6 @@ const CreateProductForm = () => {
         toast.success(result.message);
         form.reset();
         setImageFiles([]);
-        window.location.reload();
       } else {
         toast.error(result?.message);
       }

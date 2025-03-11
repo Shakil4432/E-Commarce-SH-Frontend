@@ -16,32 +16,59 @@ const Products = ({ products }: { products: IProduct[] }) => {
         </h2>
         <p className="text-gray-600 mt-2">Find the best deals on used items</p>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-5 max-w-7xl mx-auto">
-          {products.map((item, index) => (
-            <Card
-              key={index}
-              className="border hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-2 bg-white rounded-2xl  border-gray-200"
-            >
-              <CardContent className="flex flex-col items-center p-5">
+        <div className="flex mt-6 items-center justify-center flex-wrap gap-6">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div
+                key={product._id}
+                className="border p-5 rounded-xl  bg-white transition-transform transform hover:scale-100 hover:shadow-xl"
+              >
                 <Image
-                  src={item.images[0]}
-                  alt={item.title}
-                  width={180}
-                  height={180}
-                  className="rounded-lg w-full h-40 shadow-md"
+                  src={product.images[0]}
+                  alt={product.title}
+                  width={200}
+                  height={200}
+                  className="w-72 h-40 object-cover rounded-lg"
                 />
-                <h3 className="mt-4 font-semibold text-lg text-gray-800">
-                  {item.title}
-                </h3>
-                <p className="text-xl font-bold text-[#e7995e]">{item.price}</p>
-                <Link href={`/products/${item._id}`}>
-                  <Button className="mt-4 px-5 py-2 bg-[#16a34a] text-white font-medium rounded-full shadow-md hover:bg-opacity-90 transition-all">
-                    View Details
-                  </Button>
+                <Link key={product.title} href={`/products/${product._id}`}>
+                  <h2 className="text-xl font-bold mt-3 text-gray-800 hover:text-green-600 transition-colors">
+                    {product.title}
+                  </h2>
                 </Link>
-              </CardContent>
-            </Card>
-          ))}
+                <p className="text-gray-500 text-sm font-medium">
+                  {product.category}
+                </p>
+                <p className="text-lg font-bold text-green-500 mt-1">
+                  ${product.price}
+                </p>
+                <p className="text-sm text-gray-600 font-semibold">
+                  Condition: {product.condition || "N/A"}
+                </p>
+                <p
+                  className={`text-sm font-semibold mt-1 ${
+                    product.status === "sold"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {product.status === "sold" ? "Sold Out" : "Available"}
+                </p>
+
+                <div className="mt-4 flex justify-between items-center gap-2">
+                  <Link href={`/products/${product._id}`}>
+                    {" "}
+                    <Button className="bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold px-5 py-2 rounded-lg shadow-md hover:from-green-500 hover:to-green-700 transition-all">
+                      See Details
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-500 col-span-full text-lg font-semibold">
+              No products found.
+            </p>
+          )}
         </div>
         <div>
           <Link href={"/products"}>
