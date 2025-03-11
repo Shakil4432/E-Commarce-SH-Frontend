@@ -7,6 +7,7 @@ import { getOrder, verifyOrder } from "@/services/Order";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 export interface OrderData {
   id: number;
   order_id: string;
@@ -41,38 +42,23 @@ export interface OrderData {
   date_time: string;
 }
 
-interface verifyData extends OrderData {
-  data: OrderData;
-  success: boolean;
-  message: string;
-  statusCode: number;
-}
 const PaymentDetails = () => {
   const searchParams = useSearchParams();
   const userInfo = useUser();
   const orderId = searchParams.get("order_id");
-  console.log(userInfo);
-  console.log(orderId);
 
-  const [orderData, setOrderData] = useState<OrderData[] | null>(null);
   const [verifyStatus, setVerifyStatus] = useState<OrderData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  console.log(verifyStatus);
-
-  console.log(verifyStatus?.bank_status);
 
   useEffect(() => {
     const fetchOrder = async () => {
       try {
         if (!userInfo?.user?.email) return;
-        const data = await getOrder(userInfo.user.email);
-        console.log(data?.data);
-        setOrderData(data?.data);
         const verifyData = await verifyOrder(orderId);
         setVerifyStatus(verifyData?.data[0]);
-      } catch (err) {
-        setError("Failed to fetch order data");
+      } catch (err: any) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -88,7 +74,6 @@ const PaymentDetails = () => {
     <div className="container mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold text-gray-800">Order Verification</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Order Details */}
         <Card>
           <CardHeader>
             <CardTitle>Order Details</CardTitle>

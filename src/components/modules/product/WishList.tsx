@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { Heart, Trash2 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
@@ -15,27 +14,6 @@ import { addProduct } from "@/redux/features/cartSlice";
 import Image from "next/image";
 import { IProduct } from "@/types/product";
 import { toast } from "sonner";
-
-type TProduct = {
-  title: string;
-  description: string;
-  price: number;
-  condition?: "new" | "used";
-  images: string[];
-  userID: string;
-  status?: "available" | "sold";
-  category?:
-    | "Mobile Phones & Accessories"
-    | "Electronics & Gadgets"
-    | "Clothing & Fashion"
-    | "Home & Garden"
-    | "Sports & Outdoors"
-    | "Books & Magazines"
-    | "Toys & Hobbies"
-    | "Pet Supplies"
-    | "Health & Beauty"
-    | "Other";
-};
 
 const Wishlist = () => {
   const wishListData = useAppSelector(wishlistProductsSelector);

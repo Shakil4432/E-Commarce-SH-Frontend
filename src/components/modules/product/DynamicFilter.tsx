@@ -1,19 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Slider } from "@/components/ui/slider";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getConditions, getProductCategories } from "@/services/Product";
 
 export default function DynamicFilter() {
-  const [price, setPrice] = useState<number[]>([0]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [categories, setCategories] = useState<string[]>([]);
   const [conditions, setConditions] = useState<string[]>([]);
   console.log(categories, conditions);
-
-  // Dummy data for categories and brands
 
   useEffect(() => {
     const fetchData = async () => {

@@ -8,7 +8,6 @@ const ProductDetailsPage = async ({
 }) => {
   const { productId } = params;
   const { data } = await getSingleProducts(productId);
-  console.log(data);
 
   return (
     <div>

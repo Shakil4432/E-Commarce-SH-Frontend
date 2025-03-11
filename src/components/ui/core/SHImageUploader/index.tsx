@@ -1,6 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { Input } from "../../input";
-import Image from "next/image";
 
 type TImageUploaderProps = {
   imageFiles: File[] | [];

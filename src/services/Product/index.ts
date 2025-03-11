@@ -23,8 +23,7 @@ export const createProduct = async (data: FormData) => {
 export const getProducts = async (
   page?: string | undefined,
   limit?: string,
-  query?: { [key: string]: string | undefined },
-  category?: string | undefined
+  query?: { [key: string]: string | undefined }
 ) => {
   const params = new URLSearchParams();
   if (query?.price) {
@@ -121,7 +120,7 @@ export const getSalesById = async (
   return res.json();
 };
 
-export const getProductCategories = async (page?: string, limit?: string) => {
+export const getProductCategories = async () => {
   const { data } = await getProducts();
 
   const { result } = data;
@@ -131,7 +130,7 @@ export const getProductCategories = async (page?: string, limit?: string) => {
   return categories;
 };
 
-export const getConditions = async (page?: string, limit?: string) => {
+export const getConditions = async () => {
   const { data } = await getProducts("1", "8");
 
   const { result } = data;

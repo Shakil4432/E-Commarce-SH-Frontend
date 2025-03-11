@@ -8,7 +8,7 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-const inter = Inter({ subsets: ["latin", "vietnamese"] });
+const inter = Inter({ subsets: ["latin"] });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${inter.className} ${geistMono.variable} antialiased`}
+        className={` ${inter.className} ${geistSans.variable} ${inter.className} ${geistMono.variable} antialiased`}
       >
         <Providers>
           <Toaster richColors position="top-center"></Toaster>

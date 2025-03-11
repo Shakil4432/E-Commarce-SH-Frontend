@@ -1,6 +1,5 @@
 "use server";
 
-import { OrderData } from "@/app/order/verify/page";
 import { TOrder } from "@/types/order";
 import { cookies } from "next/headers";
 

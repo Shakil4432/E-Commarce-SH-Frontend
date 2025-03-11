@@ -15,9 +15,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import SHImageUplader from "@/components/ui/core/SHImageUploader";
 import { useState } from "react";
-import { createProduct, updateProduct } from "@/services/Product";
+import { updateProduct } from "@/services/Product";
 import { IProduct } from "@/types/product";
-import { title } from "process";
 
 const UpdateProductForm = ({ product }: { product: IProduct }) => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);

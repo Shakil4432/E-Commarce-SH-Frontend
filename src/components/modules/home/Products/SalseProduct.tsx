@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getProducts } from "@/services/Product";
 import { ColumnDef } from "@tanstack/react-table";
 import { SHTable } from "@/components/ui/core/SHTable";
 import { Button } from "@/components/ui/button";
@@ -9,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Pencil, Trash2 } from "lucide-react";
 import TablePagination from "@/components/ui/core/SHTable/TablePagination";
 import { IProduct } from "@/types/product";
+import Image from "next/image";
 
 export type Product = {
   _id: string;
@@ -49,9 +48,11 @@ const ManageSalesProducts = ({
       accessorKey: "images",
       header: () => <span className="text-[#16a34a] font-semibold">Image</span>,
       cell: ({ row }) => (
-        <img
+        <Image
           src={row.original.images[0]}
           alt="Product"
+          width={500}
+          height={500}
           className="w-16 h-16 rounded"
         />
       ),

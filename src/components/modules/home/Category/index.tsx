@@ -7,11 +7,10 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper/modules";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
 import { useEffect, useState } from "react";
 import { useUser } from "@/context/UserContext";
-import { getProductCategories, getProducts } from "@/services/Product";
+import { getProductCategories } from "@/services/Product";
 import { toast } from "sonner";
 import { useSearchParams, useRouter } from "next/navigation";
 

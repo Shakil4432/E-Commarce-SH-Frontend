@@ -11,12 +11,10 @@ const ProductDetails = ({ product }: { product: IProduct }) => {
 
   const handleAddToCart = () => {
     setIsAddedToCart(true);
-    // TODO: Implement cart functionality
   };
 
   const handleAddToWishlist = () => {
     setIsWishlisted(true);
-    // TODO: Implement wishlist functionality
   };
 
   return (

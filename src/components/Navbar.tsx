@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaHeart, FaEnvelope, FaShoppingCart } from "react-icons/fa"; // Importing icons
+import { FaHeart, FaShoppingCart } from "react-icons/fa"; // Importing icons
 import { FiSearch } from "react-icons/fi"; // Search icon
 import { Button } from "./ui/button";
 import Image from "next/image";
@@ -94,19 +94,8 @@ const Navbar = () => {
           <button className="bg-white text-black p-2 rounded-md shadow-md hover:bg-[#e7995e] transition-all">
             <FiSearch size={20} />
           </button>
-
-          {/* Message Icon */}
         </div>
-
-        {/* User Avatar and Dropdown */}
         <div className="flex justify-center items-center space-x-4 text-sm">
-          <div className="relative flex justify-center items-center border-2 border-white rounded-full p-2 hover:bg-[#e7995e] transition-all">
-            <Link href="/messages" className="text-white hover:text-black">
-              <FaEnvelope size={20} />
-            </Link>
-          </div>
-
-          {/* Wishlist Icon */}
           <div className="relative flex justify-center items-center border-2 border-white rounded-full p-2 hover:bg-[#e7995e] transition-all">
             <Link href="/user/wishlist" className="text-white hover:text-black">
               <FaHeart size={20} />
@@ -153,7 +142,7 @@ const Navbar = () => {
             <Link href="/login">
               <Button
                 variant="outline"
-                className="hover:text-[#16a34a] text-white border-white hover:border-[#16a34a] transition-all"
+                className="text-[#16a34a]  border-white hover:border-[#16a34a] transition-all"
               >
                 Login
               </Button>
