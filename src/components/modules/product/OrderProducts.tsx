@@ -26,7 +26,7 @@ const Orders = () => {
     };
 
     getOrderData();
-  }, []);
+  }, [user.user?.email]);
 
   return (
     <motion.div

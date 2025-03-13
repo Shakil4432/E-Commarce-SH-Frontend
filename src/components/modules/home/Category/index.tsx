@@ -35,7 +35,7 @@ const Category = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [setIsLoading]);
 
   const handleCategory = (category: string) => {
     const updatedSearchParams = new URLSearchParams(searchParams.toString());

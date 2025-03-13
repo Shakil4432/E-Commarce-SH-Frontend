@@ -65,7 +65,7 @@ const PaymentDetails = () => {
     };
 
     fetchOrder();
-  }, [userInfo?.user?.email]);
+  }, [userInfo?.user?.email, orderId]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
