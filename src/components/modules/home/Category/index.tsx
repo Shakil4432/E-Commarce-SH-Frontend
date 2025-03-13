@@ -38,7 +38,6 @@ const Category = () => {
   }, []);
 
   const handleCategory = (category: string) => {
-    const page = searchParams.get("page") || "1";
     const updatedSearchParams = new URLSearchParams(searchParams.toString());
 
     updatedSearchParams.set("category", category);
