@@ -19,8 +19,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useUser } from "@/context/UserContext";
-
-export function NavUser() {
+interface UserProps {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+}
+export function NavUser({ user }: UserProps) {
   const { isMobile } = useSidebar();
 
   const { user: userInfo } = useUser();

@@ -3,18 +3,18 @@
 import ProductDetails from "@/components/modules/product/ProductDetails";
 import { getSingleProducts } from "@/services/Product";
 import { IProduct } from "@/types/product";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 
 interface ProductPageProps {
-  params: { productId: string };
+  params: Promise<{ productId: string }>; // params is now a Promise
 }
 
 const ProductDetailsPage = ({ params }: ProductPageProps) => {
+  const { productId } = use(params); // ✅ Unwrap the params Promise using React.use()
   const [data, setData] = useState<IProduct | null>(null);
-  const { productId } = params;
 
   useEffect(() => {
-    const setDataToPage = async () => {
+    const fetchData = async () => {
       try {
         const response = await getSingleProducts(productId);
         setData(response.data);
@@ -23,8 +23,8 @@ const ProductDetailsPage = ({ params }: ProductPageProps) => {
       }
     };
 
-    setDataToPage();
-  }, [productId]);
+    fetchData();
+  }, [productId]); // ✅ Correct dependency
 
   if (!data) {
     return <div>Loading...</div>;
