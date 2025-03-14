@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@/context/UserContext";
 import { verifyOrder } from "@/services/Order";
+import Link from "next/link";
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -157,7 +158,9 @@ const PaymentDetails = () => {
           <CardHeader></CardHeader>
           <CardContent className="flex mt-5 items-center justify-center gap-2">
             <div>
-              <Button className="bg-green-500 font-bold">View Order</Button>
+              <Link href={"/user/purchases"}>
+                <Button className="bg-green-500 font-bold">View Order</Button>
+              </Link>
             </div>
           </CardContent>
         </Card>
