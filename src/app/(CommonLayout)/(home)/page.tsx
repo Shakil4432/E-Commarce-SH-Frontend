@@ -10,7 +10,7 @@ const HomePage = async () => {
   const { data } = await getProducts("1", "8");
 
   return (
-    <div className="container mx-auto">
+    <div>
       <HeroSection products={data.result}></HeroSection>
       <Category></Category>
       <Products products={data.result}></Products>

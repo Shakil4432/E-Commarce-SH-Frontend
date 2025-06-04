@@ -10,7 +10,7 @@ const Products = ({ products }: { products: IProduct[] }) => {
 
   return (
     <div>
-      <section className="py-16 text-center bg-gray-50">
+      <section className="py-16 text-center container mx-auto bg-gray-50">
         <h2 className="text-4xl font-extrabold text-[#16a34a] drop-shadow-md">
           Featured Listings
         </h2>
@@ -35,14 +35,9 @@ const Products = ({ products }: { products: IProduct[] }) => {
                     {product.title}
                   </h2>
                 </Link>
-                <p className="text-gray-500 text-sm font-medium">
-                  {product.category}
-                </p>
+
                 <p className="text-lg font-bold text-green-500 mt-1">
                   ${product.price}
-                </p>
-                <p className="text-sm text-gray-600 font-semibold">
-                  Condition: {product.condition || "N/A"}
                 </p>
                 <p
                   className={`text-sm font-semibold mt-1 ${
@@ -74,7 +69,7 @@ const Products = ({ products }: { products: IProduct[] }) => {
           <Link href={"/products"}>
             <Button
               type="button"
-              className=" mt-6 py-3 text-white bg-[#16a34a] font-medium rounded-full shadow-md hover:bg-opacity-90"
+              className=" mt-6 py-3 text-[#16a34a] bg-white font-medium rounded-full shadow-md hover:bg-opacity-90"
             >
               Load More
             </Button>

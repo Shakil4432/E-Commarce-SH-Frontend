@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { FaHeart, FaShoppingCart } from "react-icons/fa"; // Importing icons
-import { FiSearch } from "react-icons/fi"; // Search icon
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import {
@@ -16,9 +16,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { logout } from "@/services/AuthServices";
 import { useUser } from "@/context/UserContext";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { protectedRoutes } from "@/constants";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import logo from "../assets/logo.png";
 import { useAppSelector } from "@/redux/hooks";
 import { wishlistProductsSelector } from "@/redux/features/wishListSlice";
@@ -29,10 +29,11 @@ const Navbar = () => {
   const wishListData = useAppSelector(wishlistProductsSelector);
   const router = useRouter();
   const pathName = usePathname();
+  const searchParams = useSearchParams();
   const { user, setIsLoading } = useUser();
 
-  // Example cart count (replace with actual state or API data)
-  const cartItemCount = 5;
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -43,10 +44,17 @@ const Navbar = () => {
     }
   };
 
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("searchTerm", searchTerm);
+    router.push(`/products?${params.toString()}`);
+  };
+
   return (
-    <nav className="bg-gradient-to-r from-[#16a34a] to-[#e7995e] p-4 border-b-2 ">
+    <nav className="bg-gradient-to-r sticky top-0 z-50 from-[#16a34a] to-[#e7995e] p-4 border-b-2">
       <div className="container mx-auto flex items-center justify-between">
-        {/* Logo and Brand */}
         <div className="flex items-center space-x-3">
           <Link href="/">
             <Image
@@ -84,23 +92,29 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Search Bar and Cart Icons */}
-        <div className="flex items-center space-x-2">
+        {/* Search Bar (wrapped in a form to catch Enter) */}
+        <form onSubmit={handleSearch} className="flex items-center space-x-2">
           <input
             type="text"
             placeholder="Search items..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="p-2 rounded-md bg-white w-80 placeholder-gray-400 shadow-md transition-all focus:ring-2 focus:ring-[#16a34a]"
           />
-          <button className="bg-white text-black p-2 rounded-md shadow-md hover:bg-[#e7995e] transition-all">
+          <button
+            type="submit"
+            className="bg-white text-black p-2 rounded-md shadow-md hover:bg-[#e7995e] transition-all"
+          >
             <FiSearch size={20} />
           </button>
-        </div>
+        </form>
+
         <div className="flex justify-center items-center space-x-4 text-sm">
           <div className="relative flex justify-center items-center border-2 border-white rounded-full p-2 hover:bg-[#e7995e] transition-all">
             <Link href="/user/wishlist" className="text-white hover:text-black">
               <FaHeart size={20} />
             </Link>
-            {cartItemCount > 0 && (
+            {wishListData.length > 0 && (
               <div className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1 py-0.5">
                 {wishListData.length}
               </div>
@@ -112,12 +126,13 @@ const Navbar = () => {
             <Link href="/cart" className="text-white hover:text-black">
               <FaShoppingCart size={20} />
             </Link>
-            {cartItemCount > 0 && (
+            {orderData.length > 0 && (
               <div className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1 py-0.5">
                 {orderData.length}
               </div>
             )}
           </div>
+
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -142,7 +157,7 @@ const Navbar = () => {
             <Link href="/login">
               <Button
                 variant="outline"
-                className="text-[#16a34a]  border-white hover:border-[#16a34a] transition-all"
+                className="text-[#16a34a] border-white hover:border-[#16a34a] transition-all"
               >
                 Login
               </Button>

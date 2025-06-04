@@ -70,7 +70,7 @@ const AllProducts = ({
                   product.status === "sold" ? "text-red-500" : "text-green-500"
                 }`}
               >
-                {product.status === "sold" ? "Sold Out" : "Available"}
+                {product.status === "sold" ? "sold Out" : "available"}
               </p>
 
               <div className="mt-4 flex justify-between items-center gap-2">

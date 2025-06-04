@@ -9,12 +9,11 @@ import "swiper/css";
 import { Pagination } from "swiper/modules";
 
 const HeroSection = ({ products }: { products: IProduct[] }) => {
-  console.log(products);
   return (
     <div>
-      <section className="relative container rounded-3xl border-2 mt-10 mx-auto w-full min-h-[80vh] flex flex-col items-center justify-center text-center bg-[#16a34a] text-white py-20 px-5 overflow-hidden">
+      <section className="relative     mx-auto w-full min-h-[80vh] flex flex-col items-center justify-center text-center bg-[#16a34a] text-white py-20 px-5 overflow-hidden">
         {/* Background Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#16a34a] to-[#e7995e] opacity-80 rounded-3xl blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#41d075] to-[#f8a86b] opacity-80 rounded-3xl blur-sm" />
         <div className="absolute inset-0 bg-opacity-30 backdrop-blur-md rounded-3xl" />
 
         {/* Content */}
@@ -69,19 +68,22 @@ const HeroSection = ({ products }: { products: IProduct[] }) => {
               1024: { slidesPerView: 3 },
             }}
             modules={[Pagination]}
-            className="max-w-full"
+            className="max-w-6xl "
           >
             {products.map((product, index) => {
               console.log(product);
               return (
-                <SwiperSlide key={index}>
-                  <div className="bg-white rounded-lg shadow-lg p-4">
+                <SwiperSlide
+                  className="flex items-center justify-center gap-6"
+                  key={index}
+                >
+                  <div className="bg-white max-w-96 h-96  rounded-lg shadow-lg p-4">
                     <Image
                       src={product.images[0] || "/placeholder-image.jpg"}
                       alt={product.title}
                       width={300}
                       height={200}
-                      className="rounded-md h-72 w-full object-cover"
+                      className="rounded-md h-48 w-full object-cover"
                     />
                     <h3 className="mt-4 text-lg font-semibold text-gray-800">
                       {product.title}

@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import ProductDetails from "@/components/modules/product/ProductDetails";
 import { getSingleProducts } from "@/services/Product";
 import { IProduct } from "@/types/product";
@@ -27,7 +28,11 @@ const ProductDetailsPage = ({ params }: ProductPageProps) => {
   }, [productId]); // ✅ Correct dependency
 
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loading></Loading>
+      </div>
+    );
   }
 
   return (

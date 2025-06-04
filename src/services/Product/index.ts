@@ -35,6 +35,12 @@ export const getProducts = async (
   if (query?.condition) {
     params.append("condition", query.condition.toString());
   }
+  if (query?.status) {
+    params.append("status", query.status.toString());
+  }
+  if (query?.searchTerm) {
+    params.append("searchTerm", query.searchTerm.toString());
+  }
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API}/products?limit=${limit}&page=${page}&${params}`,
     {
@@ -139,6 +145,29 @@ export const getConditions = async () => {
   );
 
   return conditions;
+};
+
+export const getStatus = async () => {
+  const { data } = await getProducts("1", "8");
+
+  const { result } = data;
+  const status: string[] = result.map(
+    (result: { status: string }) => result?.status
+  );
+
+  return status;
+};
+
+export const getSearchTerm = async () => {
+  const { data } = await getProducts("1", "8");
+
+  const { result } = data;
+  const searchTerm: string[] = result.map(
+    (result: { searchTerm: string }) => result?.searchTerm
+  );
+
+  console.log(searchTerm);
+  return searchTerm;
 };
 
 export const deleteProduct = async (id: string) => {
